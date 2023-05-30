@@ -36,4 +36,5 @@ export let movieData = {
       cast: ["Ralph Fiennes", "F. Murray Abraham", "Mathieu Amalric"],
       img: "https://raw.githubusercontent.com/maronillaG/filmFinder/main/Assets/Grand_Budapest_Hotel.webp",
     },
+  
   };
