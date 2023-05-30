@@ -1,0 +1,48 @@
+body{
+    background-color: black;
+    color: white;
+    height: 100vmin;
+    width: 100vmin;
+}
+
+#site-name {
+    font-family: 'Segoe UI', Tahoma;
+    font-size: 20px;
+    margin-left: 10%;
+}
+
+.highlight {
+    color:rgb(235, 168, 80);
+}
+
+/* Search bar */
+#search-bar {
+    background-color: azure;
+    border-radius: 20px;
+    width: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#search-submit {
+    width: 20px;
+    height: 20px;
+}
+
+#search-bar * {
+    margin: 5px 10px;
+}
+
+#search-box {
+    width: 75%;
+    border: none;
+    border-radius: 20px;
+}
+
+/* Film Tiles */
+
+.film-tile {
+    border: 2px solid yellow;
+    border-radius: 10px;
+}
