@@ -1,10 +1,21 @@
 import { movieData } from './data.js';
-// --- take user input and store in javascript variable when user presses enter or clicks the search icon
+// ----- variables --------
+const container = document.querySelector('#movie-container'); // generating html elements to show 
+const submit = document.querySelector('#search-submit'); //search icon
+const userInput = document.querySelector('#search-box'); // search box
+const select = document.querySelector('#sort');  // sort icon
+const menu = document.querySelector('#dropdown-menu'); // sort list
+const options = document.querySelectorAll('.dropdown-menu li'); // list item
+let arrayData = Object.entries(movieData); // * convert movieData to an Array.
+let arraySort = Object.entries(movieData);
 
-const submit = document.querySelector('#search-submit');
-const userInput = document.querySelector('#search-box');
+
+displayTiles(arraySort)
+console.log(arrayData);
+console.log('lowestfirst:',sortDescending(arraySort,'year'));
+
+// -------- search event listeners --------
 let searchTerm = '';
-
 submit.addEventListener('click', function() {
     searchTerm = userInput.value;
     console.log('icon: ',searchTerm);
@@ -17,53 +28,57 @@ userInput.addEventListener('keydown', function(event) {
     }
 });
 
-console.log('is this changed?: '+searchTerm);
+// -------- SORT event listeners --------
+select.addEventListener('click', () => {
+    menu.classList.toggle('dropdown-menu-open');
+});
 
-console.log( Object.keys(movieData));
+/// sorting existing by year, rating 
+// if button for 'Rating: Highest First' is clicked key variable = 'rating'.
+// if button for 'Newest First' is clicked key variable is now = 'year'. 
+// if button for 'Rating: Highest First' is clicked key variable = 'rating'.
+// if button for 'Newest First' is clicked key variable is now = 'year'.
 
-searchTerm = 'The Grand Budapest Hotel';
+options.forEach( option => {
+    option.addEventListener('click', () => {
+        removeTiles();
+        
+        if (option && option.id === 'newest-first') {
+            sortDescending(arraySort, 'year');
+            menu.classList.remove('dropdown-menu-open')
+            console.log('sorted newest first', arraySort)
+            // displayTiles(arraySort);
+        }
+        if (option && option.id === 'rating-high') {
+            sortDescending(arraySort,'rating');
+            menu.classList.remove('dropdown-menu-open')
+            console.log('sorted highly rated')
+            // displayTiles(arraySort);
+        }
+        if (option && option.id === 'oldest-first') {
+            sortAscending(arraySort, 'year');
+            menu.classList.remove('dropdown-menu-open')
+            console.log('sorted oldest first')
+            // displayTiles(arraySort);
+        }
+        if (option && option.id === 'rating-low') {
+            sortAscending(arraySort,'rating');
+            menu.classList.toggle('dropdown-menu-open')
+            console.log('sorted lowest first')
+            // displayTiles(arraySort);
+        }
+        
+       setTimeout(() => {
+        displayTiles(arraySort);
+       }, 0) 
+        menu.classList.remove('dropdown-menu-open')
+    })
+});
 
-for (let movieTitle of Object.keys(movieData)) {
-    if (movieTitle === searchTerm) {
-        console.log('match found');
-    } else {
-        console.log('not working')
-    }
-}
 
-// --- return key as movie name and store in  variable for innerHTML.
-let movieName = '';
-for (let key of Object.keys(movieData)) {
-    if (key === searchTerm)  movieName = key;
-};
-console.log(movieName)
-
-
-/// sorting existing by year, runtime, rating 
-
-let checkData = Object.entries(movieData);
-
-let sorted = checkData.sort(([, a], [, b]) => {
-    const first = a.rating;
-    const second = b.rating;
-
-    if (first < second) return 1;
-    if (first > second) return -1;
-    return 0;
-})
-
-console.log('Newest First: ', checkData, checkData[0][1].year);
-
-
-
-
-// * convert movieData to an Array.
-let arrayData = Object.entries(movieData)
-
-// generating html elements to show 
-const container = document.querySelector('#movie-container');
-
-for (let i = 0; i < arrayData.length; i++) {
+// function to display movie tiles:
+function displayTiles(array) {
+    for (let i = 0; i < arrayData.length; i++) {
     const tile = document.createElement('div');
     tile.innerHTML = `
     <div id='film-tile'>
@@ -77,15 +92,10 @@ for (let i = 0; i < arrayData.length; i++) {
     `
     container.append(tile)
 }
+}
 
-// console.log(array[0][1].year)
-
-
-
-// ammending array for sorting:
-// this function takes the array of movieData and a key to sort the movies by.
-
-function sortDecending(array, key) {
+// sort functions
+function sortDescending(array, key) {
     const sortedData = array.sort(([, a], [,b ]) => {
      const item1 = a[key];
      const item2 = b[key];
@@ -97,21 +107,19 @@ function sortDecending(array, key) {
     return sortedData;
  }
  
- 
- console.log(sortDecending(checkData, 'rating'));
+ function sortAscending(array, key) {
+    const ascending = array.sort(([,a], [,b]) => {
+        let item1 = a[key];
+        let item2 = b[key];
 
- // if button for 'Rating: Highest First' is clicked key variable = 'rating'.
- // if button for 'Newest First' is clicked key variable is now = 'year'.
- 
- // if button for 'Rating: Highest First' is clicked key variable = 'rating'.
- // if button for 'Newest First' is clicked key variable is now = 'year'.
+        if (item1 < item2) return -1;
+        if (item1 > item2) return 1;
+        return 0;
+    });
+    return ascending;
+}
 
-// menu.classList.toggle('dropdown-menu-open')
-
-const select = document.querySelector('#sort');
- const menu = document.querySelector('#dropdown-menu');
-
- 
- select.addEventListener('click', () => {
-    menu.classList.toggle('dropdown-menu-open');
- });
+function removeTiles() {
+    while(container.firstChild)
+        container.firstChild.remove();
+}

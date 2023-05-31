@@ -153,3 +153,11 @@ for ( let movie in obj) {
 //             };
 //         }
 // }
+
+// --- return key as movie name and store in  variable for innerHTML.
+let movieName = '';
+for (let key of Object.keys(movieData)) {
+    if (key === searchTerm)  movieName = key;
+};
+// console.log(movieName)
+// console.log(array[0][1].year)

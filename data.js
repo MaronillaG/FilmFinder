@@ -50,6 +50,4 @@ const container = document.querySelector('#movie-container');
 //     `
 //     container.append(tile);
 // })
-
-
-console.log(array[0][1].year)
+// console.log(array[0][1].year)
