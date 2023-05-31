@@ -34,7 +34,7 @@ body{
     justify-content: space-between;
 }
 
-#search-submit, #filter{
+#search-submit, #sort{
     cursor: pointer;
     width: 20px;
     height: 20px;
@@ -43,14 +43,52 @@ body{
 
 #search-box {
     width: 75%;
+    height: 30px;
     border: none;
     border-radius: 20px;
+    margin: 0.3em;
 }
 
 #search-bar * {
     margin: 5px 10px;
 }
 
+.dropdown-menu{
+    list-style: none;
+    position: absolute;
+    z-index: 1;
+    display: flex;
+    display: none; 
+    opacity: 1;
+    transition: 0.2s;
+    flex-direction: column;
+    width: auto;
+    background-color: grey;
+    font-size: 0.7rem;
+    margin-top: 5px;
+    padding-top: 5px;
+    border-radius: 5px;
+}
+.dropdown-menu li{
+    color: whitesmoke;
+    cursor: pointer;
+    padding: 0.7em 0.5em;
+    margin: 0.1em;
+    margin-bottom: 5px;
+    border-radius: 5px;
+}
+
+.dropdown-menu li:hover {
+    background-color: black;
+    background-color: #2a2d35;
+
+}
+
+
+.dropdown-menu-open{
+    display: block;
+    opacity:1;
+}
 /* Film Tiles */
 
 #film-tile {

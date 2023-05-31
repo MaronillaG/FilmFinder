@@ -103,7 +103,15 @@ function sortDecending(array, key) {
  // if button for 'Rating: Highest First' is clicked key variable = 'rating'.
  // if button for 'Newest First' is clicked key variable is now = 'year'.
  
- 
  // if button for 'Rating: Highest First' is clicked key variable = 'rating'.
  // if button for 'Newest First' is clicked key variable is now = 'year'.
 
+// menu.classList.toggle('dropdown-menu-open')
+
+const select = document.querySelector('#sort');
+ const menu = document.querySelector('#dropdown-menu');
+
+ 
+ select.addEventListener('click', () => {
+    menu.classList.toggle('dropdown-menu-open');
+ });
