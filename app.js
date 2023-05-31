@@ -6,13 +6,10 @@ const userInput = document.querySelector('#search-box'); // search box
 const select = document.querySelector('#sort');  // sort icon
 const menu = document.querySelector('#dropdown-menu'); // sort list
 const options = document.querySelectorAll('.dropdown-menu li'); // list item
-let arrayData = Object.entries(movieData); // * convert movieData to an Array.
 let arraySort = Object.entries(movieData);
 
 
 displayTiles(arraySort)
-console.log(arrayData);
-console.log('lowestfirst:',sortDescending(arraySort,'year'));
 
 // -------- search event listeners --------
 let searchTerm = '';
@@ -41,36 +38,29 @@ select.addEventListener('click', () => {
 
 options.forEach( option => {
     option.addEventListener('click', () => {
-        removeTiles();
-        
         if (option && option.id === 'newest-first') {
             sortDescending(arraySort, 'year');
             menu.classList.remove('dropdown-menu-open')
             console.log('sorted newest first', arraySort)
-            // displayTiles(arraySort);
         }
         if (option && option.id === 'rating-high') {
             sortDescending(arraySort,'rating');
             menu.classList.remove('dropdown-menu-open')
             console.log('sorted highly rated')
-            // displayTiles(arraySort);
         }
         if (option && option.id === 'oldest-first') {
             sortAscending(arraySort, 'year');
             menu.classList.remove('dropdown-menu-open')
             console.log('sorted oldest first')
-            // displayTiles(arraySort);
         }
         if (option && option.id === 'rating-low') {
             sortAscending(arraySort,'rating');
             menu.classList.toggle('dropdown-menu-open')
             console.log('sorted lowest first')
-            // displayTiles(arraySort);
         }
         
-       setTimeout(() => {
+        removeTiles();
         displayTiles(arraySort);
-       }, 0) 
         menu.classList.remove('dropdown-menu-open')
     })
 });
@@ -78,15 +68,15 @@ options.forEach( option => {
 
 // function to display movie tiles:
 function displayTiles(array) {
-    for (let i = 0; i < arrayData.length; i++) {
+    for (let i = 0; i < arraySort.length; i++) {
     const tile = document.createElement('div');
     tile.innerHTML = `
     <div id='film-tile'>
-        <img id='film-poster' src=${arrayData[i][1].img}>
-        <h3 id='film-title'>${arrayData[i][0]}</h3>
+        <img id='film-poster' src=${arraySort[i][1].img}>
+        <h3 id='film-title'>${arraySort[i][0]}</h3>
         <ul id='film-info'>
-            <li id='year'>(${arrayData[i][1].year}) </li>
-            <li id='rating'>${arrayData[i][1].rating}</li>
+            <li id='year'>(${arraySort[i][1].year}) </li>
+            <li id='rating'>${arraySort[i][1].rating}</li>
         <ul>
     </div>
     `
