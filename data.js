@@ -38,3 +38,18 @@ export let movieData = {
     },
   
   };
+
+  /// creating tiles from sorted array
+let array = [['movie1', {1:'z', year:20}], ['movie2', {1:'z', year:21}], ['movie3', {1:'z',year:22}]];
+const container = document.querySelector('#movie-container');
+
+// array.forEach(item => {
+//     const tile = document.createElement('div');
+//     tile.innerHTML = `
+//     <div id='${item}'>${item}<div>;
+//     `
+//     container.append(tile);
+// })
+
+
+console.log(array[0][1].year)

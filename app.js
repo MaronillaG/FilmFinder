@@ -38,50 +38,72 @@ for (let key of Object.keys(movieData)) {
 };
 console.log(movieName)
 
-// --- generate html film tile based on all database contents: 
-// logic: display movie information for matched userInput, otherwise: show all movies as tile  (limit to 10)
-let data = movieData;
-const tileDeck = document.querySelector('section'); // location of where to insert tile
-searchTerm = 'The Darjeeling Limited';
-createTile(movieData);
 
-function createTile(data) {
-        const tile = document.createElement('div'); // tile that we are creating. must be inside loop otherwise overwrite occurs.
-        
-        if (searchTerm in data) {
-            console.log('show one tile only');
-            tile.setAttribute('id', 'film-tile2');
+/// sorting existing by year, runtime, rating 
 
-            tile.innerHTML = `
-            <img id='film-poster' src=${data[searchTerm].img}>
-            <div id='film-info'>
-                <h3 id='film-title' class='info'>${searchTerm}</h3>
-                <ul >
-                    <li id='year'class='info'>(${data[searchTerm].year}) </li>
-                    <li id='rating'class='info'>${data[searchTerm].rating}</li>
-                    <li id='plot'class='info'>${data[searchTerm].plot}</li>
-                    <li id='cast'class='info'>Main Actors:${data[searchTerm].cast}) </li>
-                <ul>
-            </div>
-            `
-            tileDeck.append(tile);
-        } else {
-            for ( let item in data) {
-                const tile = document.createElement('div'); 
-                tile.setAttribute('id', 'film-tile');
-                console.log('')
-    
-                tile.innerHTML = `
-                <img id='film-poster' src=${movieData[item].img}>
-                <h3 id='film-title'>${item}</h3>
-                <ul id='film-info'>
-                <li id='year'>(${movieData[item].year}) </li>
-                <li id='rating'>${movieData[item].rating}</li>
-                <ul>
-                `
-                tileDeck.append(tile);
-            };
-        }
+let checkData = Object.entries(movieData);
+
+let sorted = checkData.sort(([, a], [, b]) => {
+    const first = a.rating;
+    const second = b.rating;
+
+    if (first < second) return 1;
+    if (first > second) return -1;
+    return 0;
+})
+
+console.log('Newest First: ', checkData, checkData[0][1].year);
+
+
+
+
+// * convert movieData to an Array.
+let arrayData = Object.entries(movieData)
+
+// generating html elements to show 
+const container = document.querySelector('#movie-container');
+
+for (let i = 0; i < arrayData.length; i++) {
+    const tile = document.createElement('div');
+    tile.innerHTML = `
+    <div id='film-tile'>
+        <img id='film-poster' src=${arrayData[i][1].img}>
+        <h3 id='film-title'>${arrayData[i][0]}</h3>
+        <ul id='film-info'>
+            <li id='year'>(${arrayData[i][1].year}) </li>
+            <li id='rating'>${arrayData[i][1].rating}</li>
+        <ul>
+    </div>
+    `
+    container.append(tile)
 }
 
+// console.log(array[0][1].year)
+
+
+
+// ammending array for sorting:
+// this function takes the array of movieData and a key to sort the movies by.
+
+function sortDecending(array, key) {
+    const sortedData = array.sort(([, a], [,b ]) => {
+     const item1 = a[key];
+     const item2 = b[key];
+ 
+     if (item1 < item2) return 1;
+     if (item1 > item2) return -1;
+     return 0;
+    });
+    return sortedData;
+ }
+ 
+ 
+ console.log(sortDecending(checkData, 'rating'));
+
+ // if button for 'Rating: Highest First' is clicked key variable = 'rating'.
+ // if button for 'Newest First' is clicked key variable is now = 'year'.
+ 
+ 
+ // if button for 'Rating: Highest First' is clicked key variable = 'rating'.
+ // if button for 'Newest First' is clicked key variable is now = 'year'.
 
