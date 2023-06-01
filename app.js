@@ -7,29 +7,31 @@ const select = document.querySelector('#sort');  // sort icon
 const menu = document.querySelector('#dropdown-menu'); // sort list
 const options = document.querySelectorAll('.dropdown-menu li'); // list item
 let movieDataArray = Object.entries(movieData);
-let arraySort = Object.entries(movieData);
 
-let search = ''; // this needs to be controlled by userinput somehow
+let searchTerm = '';
 
-// if (search === '' ){
-//     displayTiles(movieDataArray);
-// }
-// else {
-//     removeTiles(movieDataArray);
-// }
+if (searchTerm === '' ){
+    displayTiles(movieDataArray);
+}
+else {
+    removeTiles(movieDataArray);
+}
 
 
 // -------- search event listeners --------
-let searchTerm = '';
 submit.addEventListener('click', function() {
     searchTerm = userInput.value;
     console.log('icon: ',searchTerm);
+    displayMatches(movieDataArray,searchTerm);
+
 });
 
 userInput.addEventListener('keydown', function(event) {
     if (event.key === 'Enter') {
         searchTerm = userInput.value;
         console.log('enter: ',searchTerm);
+        displayMatches(movieDataArray,searchTerm);
+
     }
 });
 
@@ -47,28 +49,28 @@ select.addEventListener('click', () => {
 options.forEach( option => {
     option.addEventListener('click', () => {
         if (option && option.id === 'newest-first') {
-            sortDescending(arraySort, 'year');
+            sortDescending(movieDataArray, 'year');
             menu.classList.remove('dropdown-menu-open')
-            console.log('sorted newest first', arraySort)
+            console.log('sorted newest first', movieDataArray)
         }
         if (option && option.id === 'rating-high') {
-            sortDescending(arraySort,'rating');
+            sortDescending(movieDataArray,'rating');
             menu.classList.remove('dropdown-menu-open')
             console.log('sorted highly rated')
         }
         if (option && option.id === 'oldest-first') {
-            sortAscending(arraySort, 'year');
+            sortAscending(movieDataArray, 'year');
             menu.classList.remove('dropdown-menu-open')
             console.log('sorted oldest first')
         }
         if (option && option.id === 'rating-low') {
-            sortAscending(arraySort,'rating');
+            sortAscending(movieDataArray,'rating');
             menu.classList.toggle('dropdown-menu-open')
             console.log('sorted lowest first')
         }
         
         removeTiles();
-        displayTiles(arraySort);
+        displayTiles(movieDataArray);
         menu.classList.remove('dropdown-menu-open')
     })
 });
@@ -92,6 +94,10 @@ function displayTiles(array) {
 }
 }
 
+ function removeTiles() {
+    while(container.firstChild)
+        container.firstChild.remove();
+}
 // sort functions
 function sortDescending(array, key) {
     const sortedData = array.sort(([, a], [,b ]) => {
@@ -104,11 +110,6 @@ function sortDescending(array, key) {
     });
     return sortedData;
  }
-
- function removeTiles() {
-    while(container.firstChild)
-        container.firstChild.remove();
-}
 
  function sortAscending(array, key) {
     const ascending = array.sort(([,a], [,b]) => {
@@ -161,12 +162,27 @@ function infoForMatched(target, matches) {
     })
     return filmDetails;
 }
+searchTerm = 'grand';
+// function that displays film tiles based on input from user search.
+function displayMatches(dataArray,searchWord ) {
+    removeTiles();
+    const phase1 = getFilmTitles(dataArray);
+    const phase2 = matchesFromInput(phase1,searchWord);
+    const phase3 = infoForMatched(dataArray, phase2)
+    displayTiles(phase3)
+    // //checks:
+    // console.log('phase1',phase1);
+    // console.log('phase2',phase2);
+    // console.log('phase3', phase3)
+}
 
-const phase1 = getFilmTitles(testArray);
-const phase2 = matchesFromInput(phase1,'royal');
-const phase3 = infoForMatched(testArray, phase2)
-displayTiles(phase3)
-console.log('phase1',phase1);
-console.log('phase2',phase2);
-console.log('phase3', phase3)
+// displayMatches(movieDataArray,searchTerm); // works! 
+
+// const phase1 = getFilmTitles(testArray);
+// const phase2 = matchesFromInput(phase1,'royal');
+// const phase3 = infoForMatched(testArray, phase2)
+// // displayTiles(phase3)
+// console.log('phase1',phase1);
+// console.log('phase2',phase2);
+// console.log('phase3', phase3)
 
