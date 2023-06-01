@@ -8,12 +8,12 @@ export let movieData = {
       img: "https://raw.githubusercontent.com/MaronillaG/FilmFinder/main/Assets/Darjeeling_Limited_Poster.jpg",
     },
     "Battle Royale": {
-      plot: "A year after their father's funeral, three brothers travel across India by train in an attempt to bond with each other.",
-      cast: ["Jason Schwartzman", "Owen Wilson", "Adrien Brody"],
-      runtime: 151,
-      rating: 7.2,
-      year: 2007,
-      img: "https://raw.githubusercontent.com/MaronillaG/FilmFinder/main/Assets/Darjeeling_Limited_Poster.jpg",
+      plot: "In the future, the Japanese government captures a class of ninth-grade students and forces them to kill each other under the revolutionary \"Battle Royale\" act.",
+      cast: ["Tatsuya FujiwaraAki", "Aki Maeda", "Tarô Yamamoto"],
+      runtime: 113,
+      rating: 7.6,
+      year: 2000,
+      img: "https://raw.githubusercontent.com/MaronillaG/FilmFinder/main/Assets/BR.jpg",
     },
     "The Royal Tenenbaums": {
       plot: "The eccentric members of a dysfunctional family reluctantly gather under the same roof for various reasons",
@@ -44,18 +44,12 @@ export let movieData = {
       cast: ["Ralph Fiennes", "F. Murray Abraham", "Mathieu Amalric"],
       img: "https://raw.githubusercontent.com/maronillaG/filmFinder/main/Assets/Grand_Budapest_Hotel.webp",
     },
-  
+    "Harry Potter and the Half-Blood Prince": {
+      rating: 8.1,
+      runtime: 153,
+      year: 2009,
+      plot: "As Harry Potter begins his sixth year at Hogwarts, he discovers an old book marked as \"the property of the Half-Blood Prince\" and begins to learn more about Lord Voldemort's dark past.",
+      cast: ["Daniel Radcliffe", "Emma Watson", "Rupert Grint"],
+      img: "https://raw.githubusercontent.com/maronillaG/filmFinder/main/Assets/hp.jpg",
+    },
   };
-
-  /// creating tiles from sorted array
-let array = [['movie1', {1:'z', year:20}], ['movie2', {1:'z', year:21}], ['movie3', {1:'z',year:22}]];
-const container = document.querySelector('#movie-container');
-
-// array.forEach(item => {
-//     const tile = document.createElement('div');
-//     tile.innerHTML = `
-//     <div id='${item}'>${item}<div>;
-//     `
-//     container.append(tile);
-// })
-// console.log(array[0][1].year)
