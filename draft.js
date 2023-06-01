@@ -162,3 +162,44 @@ for (let key of Object.keys(movieData)) {
 // console.log(movieName)
 // console.log(array[0][1].year)
 
+/// pulling data from movieData array from found matches array
+let tesssst = [
+    ['Battle Royale', {plot: 'bla bla', cast: 'bla blac blah'}],
+    ['The Grand Budpest', {plot: 'bla bla', cast: 'bla blac blah'}],
+    ['The Royal Tenenmbaums', {plot: 'bla bla', cast: 'bla blac blah'}]
+]
+
+let found = ['The Royal Tenenbaums', 'Battle Royale']
+
+let returnEntries = tesssst.filter(array => {
+    return found.includes(array[0])
+})
+console.log('testing: ', returnEntries)
+
+
+// console.log('works?: ', matchesFromInput(titleList,'budapest'));
+// console.log('test array', testArray); 
+// //accessing  the movie titles and store in an array
+// let titleList = []
+// for (let i = 0; i < testArray.length;i++) {
+//     titleList.push(testArray[i][0])
+// }
+// console.log('titleList = ' + titleList);
+// return title from titleList array based on search term.
+// let findMe = 'royal'
+// let foundTitle = titleList.filter(item => {return item.toLowerCase().includes(findMe.toLowerCase())})
+
+// console.log('matched from: titleList', foundTitle);
+
+// //return movieData item based on titleList matches array. 
+// let getFilmsArray = testArray.filter(array => {return foundTitle.includes(array[0])})
+// console.log('should show matched movieData entries',getFilmsArray)
+
+
+function cleanse(string) {
+    return string.toLowerCase();
+}
+
+
+
+// console.log(getFilmTitles(testArray))

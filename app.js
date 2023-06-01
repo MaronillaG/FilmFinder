@@ -11,12 +11,12 @@ let arraySort = Object.entries(movieData);
 
 let search = ''; // this needs to be controlled by userinput somehow
 
-if (search === '' ){
-    displayTiles(movieDataArray);
-}
-else {
-    removeTiles(movieDataArray);
-}
+// if (search === '' ){
+//     displayTiles(movieDataArray);
+// }
+// else {
+//     removeTiles(movieDataArray);
+// }
 
 
 // -------- search event listeners --------
@@ -135,24 +135,38 @@ function sortDescending(array, key) {
 
 // searching only keynames in array version of movieData object
 let testArray = Object.entries(movieData);
-console.log(testArray[0][0]); 
-//accessing  the movie titles and store in an array
-let titleList = []
-for (let i = 0; i < testArray.length;i++) {
-    titleList.push(testArray[i][0])
+let titleList = [];
+// create an array showing film titles 
+function getFilmTitles(array) {
+    for (let i = 0; i < array.length;i++) {
+      titleList.push(array[i][0])
+    };
+    return titleList;
 }
-console.log('titleList = ' + titleList);
-// return title from titleList array based on search term.
-let ccc = 'royal'
-let foundTitle = titleList.filter(item => {return item.toLowerCase().includes(ccc.toLowerCase())})
+// console.log(getFilmTitles(testArray))
 
-console.log('matched from: titleList', foundTitle);
-
-//return movieData item based on titleList matches array. 
-let getFilmsArray = foundTitle.filter(array => {return testArray.includes('array')})
-console.log(getFilmsArray)
-function cleanse(string) {
-    return string.toLowerCase();
+// create an array of titles items that contain a search word
+function matchesFromInput(target,word) {
+    let matches = target.filter(item => {
+        return item.toLowerCase().includes(word.toLowerCase())
+    });
+    return matches;
+    console.log('successful matches: ', matches)
 }
 
+// create an array from database from successful matches.
+function infoForMatched(target, matches) {
+    let filmDetails = target.filter(item => {
+        return matches.includes(item[0]);
+    })
+    return filmDetails;
+}
+
+const phase1 = getFilmTitles(testArray);
+const phase2 = matchesFromInput(phase1,'royal');
+const phase3 = infoForMatched(testArray, phase2)
+displayTiles(phase3)
+console.log('phase1',phase1);
+console.log('phase2',phase2);
+console.log('phase3', phase3)
 
