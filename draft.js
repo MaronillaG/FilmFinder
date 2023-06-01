@@ -161,3 +161,4 @@ for (let key of Object.keys(movieData)) {
 };
 // console.log(movieName)
 // console.log(array[0][1].year)
+

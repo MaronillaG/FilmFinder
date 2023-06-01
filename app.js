@@ -6,10 +6,18 @@ const userInput = document.querySelector('#search-box'); // search box
 const select = document.querySelector('#sort');  // sort icon
 const menu = document.querySelector('#dropdown-menu'); // sort list
 const options = document.querySelectorAll('.dropdown-menu li'); // list item
+let movieDataArray = Object.entries(movieData);
 let arraySort = Object.entries(movieData);
 
+let search = '';
 
-displayTiles(arraySort)
+if (search === '' ){
+    displayTiles(movieDataArray);
+}
+else {
+    removeTiles(movieDataArray);
+}
+
 
 // -------- search event listeners --------
 let searchTerm = '';
@@ -68,15 +76,15 @@ options.forEach( option => {
 
 // function to display movie tiles:
 function displayTiles(array) {
-    for (let i = 0; i < arraySort.length; i++) {
+    for (let i = 0; i < array.length; i++) {
     const tile = document.createElement('div');
     tile.innerHTML = `
     <div id='film-tile'>
-        <img id='film-poster' src=${arraySort[i][1].img}>
-        <h3 id='film-title'>${arraySort[i][0]}</h3>
+        <img id='film-poster' src=${array[i][1].img}>
+        <h3 id='film-title'>${array[i][0]}</h3>
         <ul id='film-info'>
-            <li id='year'>(${arraySort[i][1].year}) </li>
-            <li id='rating'>${arraySort[i][1].rating}</li>
+            <li id='year'>(${array[i][1].year}) </li>
+            <li id='rating'>${array[i][1].rating}</li>
         <ul>
     </div>
     `
@@ -96,7 +104,12 @@ function sortDescending(array, key) {
     });
     return sortedData;
  }
- 
+
+ function removeTiles() {
+    while(container.firstChild)
+        container.firstChild.remove();
+}
+
  function sortAscending(array, key) {
     const ascending = array.sort(([,a], [,b]) => {
         let item1 = a[key];
@@ -109,7 +122,18 @@ function sortDescending(array, key) {
     return ascending;
 }
 
-function removeTiles() {
-    while(container.firstChild)
-        container.firstChild.remove();
+let testArray = Object.keys(movieData);
+console.log(testArray);
+let findThis = 'royal tenenbaums' // input from user
+let searchList = testArray.map(item => item.trim().toLowerCase()); // cleansed movieData array for searching purposes.
+// do i need to sort searchList Alphabetically?
+let cleansedSearchTerm = findThis.split(' '); // convert input to multiple terms
+let found = searchList.filter(item => item.includes(findThis)) // returns an array of found items.
+console.log(found);
+displayTiles(found)
+
+function cleanse(anything) {
+    return anything.toLowerCase();
 }
+
+
