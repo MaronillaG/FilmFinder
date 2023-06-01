@@ -7,6 +7,14 @@ export let movieData = {
       year: 2007,
       img: "https://raw.githubusercontent.com/MaronillaG/FilmFinder/main/Assets/Darjeeling_Limited_Poster.jpg",
     },
+    "Battle Royale": {
+      plot: "A year after their father's funeral, three brothers travel across India by train in an attempt to bond with each other.",
+      cast: ["Jason Schwartzman", "Owen Wilson", "Adrien Brody"],
+      runtime: 151,
+      rating: 7.2,
+      year: 2007,
+      img: "https://raw.githubusercontent.com/MaronillaG/FilmFinder/main/Assets/Darjeeling_Limited_Poster.jpg",
+    },
     "The Royal Tenenbaums": {
       plot: "The eccentric members of a dysfunctional family reluctantly gather under the same roof for various reasons",
       rating: 7.6,

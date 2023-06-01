@@ -9,7 +9,7 @@ const options = document.querySelectorAll('.dropdown-menu li'); // list item
 let movieDataArray = Object.entries(movieData);
 let arraySort = Object.entries(movieData);
 
-let search = '';
+let search = ''; // this needs to be controlled by userinput somehow
 
 if (search === '' ){
     displayTiles(movieDataArray);
@@ -122,18 +122,37 @@ function sortDescending(array, key) {
     return ascending;
 }
 
-let testArray = Object.keys(movieData);
-console.log(testArray);
-let findThis = 'royal tenenbaums' // input from user
-let searchList = testArray.map(item => item.trim().toLowerCase()); // cleansed movieData array for searching purposes.
-// do i need to sort searchList Alphabetically?
-let cleansedSearchTerm = findThis.split(' '); // convert input to multiple terms
-let found = searchList.filter(item => item.includes(findThis)) // returns an array of found items.
-console.log(found);
-displayTiles(found)
+// // searching array of movie titles pulled from movieData.
+// let testArray = Object.keys(movieData);
+// console.log(testArray);
+// let findThis = 'royal tenenbaums' // input from user
+// let searchList = testArray.map(item => item.trim().toLowerCase()); // cleansed movieData array for searching purposes.
+// // do i need to sort searchList Alphabetically?
+// let cleansedSearchTerm = findThis.split(' '); // convert input to multiple terms
+// let found = searchList.filter(item => item.includes(findThis)) // returns an array of found items 
+// console.log(found);
+// // displayTiles(testArray)
 
-function cleanse(anything) {
-    return anything.toLowerCase();
+// searching only keynames in array version of movieData object
+let testArray = Object.entries(movieData);
+console.log(testArray[0][0]); 
+//accessing  the movie titles and store in an array
+let titleList = []
+for (let i = 0; i < testArray.length;i++) {
+    titleList.push(testArray[i][0])
+}
+console.log('titleList = ' + titleList);
+// return title from titleList array based on search term.
+let ccc = 'royal'
+let foundTitle = titleList.filter(item => {return item.toLowerCase().includes(ccc.toLowerCase())})
+
+console.log('matched from: titleList', foundTitle);
+
+//return movieData item based on titleList matches array. 
+let getFilmsArray = foundTitle.filter(array => {return testArray.includes('array')})
+console.log(getFilmsArray)
+function cleanse(string) {
+    return string.toLowerCase();
 }
 
 
