@@ -1,23 +1,22 @@
-body{
+body {
     background-color: black;
     color: white;
-    height: 100vmin;
-    width: 100%;
+    height: 100vh;
+    width: 100vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-* {
+:root {
     font-family: 'Segoe UI', Tahoma;
+    font-size: 16px;
 }
 
+/* logo */
 #site-name {
-    font-size: 20px;
-    margin-left: 10%;
-    display: absolute;
-    
+    font-size: 2rem;
 }
 
 .highlight {
@@ -34,7 +33,7 @@ body{
     justify-content: space-between;
 }
 
-#search-submit, #sort{
+#search-submit, #sort {
     cursor: pointer;
     width: 20px;
     height: 20px;
@@ -47,79 +46,90 @@ body{
     border: none;
     border-radius: 20px;
     margin: 0.3em;
+    padding: 2px;
 }
-
+#search-box:focus {
+    outline: none;
+}
 #search-bar * {
     margin: 5px 10px;
 }
 
-.dropdown-menu{
+/* dropdown  */
+.dropdown-menu {
     list-style: none;
     position: absolute;
     z-index: 1;
     display: flex;
-    display: none; 
+    display: none;
     opacity: 1;
     transition: 0.2s;
     flex-direction: column;
     width: auto;
-    background-color: grey;
-    font-size: 0.7rem;
-    margin-top: 5px;
-    padding-top: 5px;
-    border-radius: 5px;
+    background-color:rgb(235, 168, 80);
+    font-size: 0.8rem;
+    margin-top: 3px;
+    border-radius: 3px;
+    padding:0.3em;;
 }
-.dropdown-menu li{
-    color: whitesmoke;
+.dropdown-menu li {
+    color:  #2a2d35;
     cursor: pointer;
-    padding: 0.7em 0.5em;
+    padding: 0.5em;
     margin: 0.1em;
-    margin-bottom: 5px;
     border-radius: 5px;
 }
 
 .dropdown-menu li:hover {
-    background-color: black;
     background-color: #2a2d35;
-
+    color: whitesmoke;
 }
 
-
-.dropdown-menu-open{
+.dropdown-menu-open {
     display: block;
     opacity:1;
 }
-/* Film Tiles */
+
+/* Films Section */
+#movie-container{
+    height: 100px;
+    margin: 50px 2%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+}
 
 #film-tile {
     border: 2px solid white;
     border-radius: 10px;
-    min-width: 150px;
-    background-color: pink;
+    width: 210px;
+    max-height: 400px;;
+    background-color: rgb(248, 218, 186);
     color: black;
     font-size: .5rem;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-
-#movie-container{
-    margin: 5% 2%;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+#film-title, #film-info {
+    margin-top: -8px;
 }
-
-/* Film Tile Content */
-#film-poster{
-    max-height: 150px;
-    width: auto;   
-    padding: 10px 0;
+/* Film Tile Contents */
+#film-poster {
+    max-height: 250px ;
+    width: 85%;   
+    padding: 10px 10px;
+    object-fit: cover;
 }
 
 #film-title {
-    padding: 0;
-    margin: 0;
+    padding: 2px;
+    font-size: 0.8rem;
+    height:25px;
+    width: 85%;
+    text-align: center;
+    text-overflow: ellipses;
 }
 
 ul {
@@ -127,26 +137,41 @@ ul {
     list-style: none;
     justify-content: space-between;
     padding: 0 10px;
-    margin: 2px;;
+    font-size: 0.65rem;
+    /* margin-top: -5px; */
 }
 
 li {
     padding:0  10px;
-    margin-bottom: 10px;
+    /* margin-bottom: 10px; */
 }
 
-
-#film-tile2{
-    display: flex;
-    background-color: white;
-    color: red;
-}
-
-#film-info{
+#film-info {
     display:flex;
     flex-direction: row;
 }
 
 .info {
     width: 100%;
+}
+
+#plot {
+    color: #2a2d35;
+    border: 2px solid white;
+    width: 80%;
+    height: 50px;
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 0.8rem;
+    cursor: pointer;
+}
+
+.collapsed {
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.expanded {
+    background-color: aqua;
+    overflow: visible;
+    /* white-space: normal; */
 }

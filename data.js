@@ -50,6 +50,6 @@ export let movieData = {
       year: 2009,
       plot: "As Harry Potter begins his sixth year at Hogwarts, he discovers an old book marked as \"the property of the Half-Blood Prince\" and begins to learn more about Lord Voldemort's dark past.",
       cast: ["Daniel Radcliffe", "Emma Watson", "Rupert Grint"],
-      img: "https://raw.githubusercontent.com/maronillaG/filmFinder/main/Assets/hp.jpg",
+      img: "https://raw.githubusercontent.com/maronillaG/filmFinder/main/Assets/hp.webp",
     },
   };

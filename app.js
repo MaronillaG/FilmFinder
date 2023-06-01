@@ -6,6 +6,7 @@ const userInput = document.querySelector('#search-box'); // search box
 const select = document.querySelector('#sort');  // sort icon
 const menu = document.querySelector('#dropdown-menu'); // sort list
 const options = document.querySelectorAll('.dropdown-menu li'); // list item
+const plot = document.getElementById('plot') // for toggling plot summary
 let movieDataArray = Object.entries(movieData);
 
 let searchTerm = '';
@@ -75,6 +76,11 @@ options.forEach( option => {
     })
 });
 
+// display event listener for plot
+
+plot.addEventListener('click', () => {
+    this.classList.toggle('expanded');
+})
 
 // function to display movie tiles:
 function displayTiles(array) {
@@ -85,14 +91,16 @@ function displayTiles(array) {
         <img id='film-poster' src=${array[i][1].img}>
         <h3 id='film-title'>${array[i][0]}</h3>
         <ul id='film-info'>
-            <li id='year'>(${array[i][1].year}) </li>
-            <li id='rating'>${array[i][1].rating}</li>
-        <ul>
+        <li id='year'>(${array[i][1].year}) </li>
+        <li id='rating' class='rating'>${array[i][1].rating}</li>
+        </ul>
+        <p id="plot" class="collapsed">${array[i][1].plot}</p>
     </div>
     `
     container.append(tile)
 }
 }
+
 
  function removeTiles() {
     while(container.firstChild)
