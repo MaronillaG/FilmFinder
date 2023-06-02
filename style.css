@@ -54,7 +54,13 @@ body {
 #search-bar * {
     margin: 5px 10px;
 }
-
+#clear{
+    margin-top: 15px;
+    border-radius: 10px;
+    background-color:#2a2d35;
+    color: white;
+    cursor:pointer;
+}
 /* dropdown  */
 .dropdown-menu {
     list-style: none;
@@ -174,4 +180,13 @@ li {
     background-color: aqua;
     overflow: visible;
     /* white-space: normal; */
+}
+
+.message {
+    /* position: absolute; */
+    margin: -100px;
+    display: none;
+}
+.message-show{
+    display: block;
 }

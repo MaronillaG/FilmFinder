@@ -8,15 +8,20 @@ const menu = document.querySelector('#dropdown-menu'); // sort list
 const options = document.querySelectorAll('.dropdown-menu li'); // list item
 const plot = document.getElementById('plot') // for toggling plot summary
 let movieDataArray = Object.entries(movieData);
-
+let currentDisplay = [];
 let searchTerm = '';
+let titleList = [];
 
-if (searchTerm === '' ){
-    displayTiles(movieDataArray);
+currentDisplay = movieDataArray;
+displayTiles(currentDisplay)
+console.log(movieDataArray);
+
+function clearSearch() {
+    searchTerm = '';
+    
 }
-else {
-    removeTiles(movieDataArray);
-}
+
+const notFoundMessage = document.querySelector('#message');
 
 
 // -------- search event listeners --------
@@ -36,42 +41,47 @@ userInput.addEventListener('keydown', function(event) {
     }
 });
 
+const clear = document.querySelector('#clear');
+
+clear.addEventListener('click', () => {
+    clearSearch();
+    userInput.value = '';
+    currentDisplay = movieDataArray;
+    removeTiles();
+    displayTiles(currentDisplay);    
+})
 // -------- SORT event listeners --------
 select.addEventListener('click', () => {
     menu.classList.toggle('dropdown-menu-open');
 });
 
-/// sorting existing by year, rating 
-// if button for 'Rating: Highest First' is clicked key variable = 'rating'.
-// if button for 'Newest First' is clicked key variable is now = 'year'. 
-// if button for 'Rating: Highest First' is clicked key variable = 'rating'.
-// if button for 'Newest First' is clicked key variable is now = 'year'.
 
+/// sorting existing by year, rating 
 options.forEach( option => {
     option.addEventListener('click', () => {
         if (option && option.id === 'newest-first') {
-            sortDescending(movieDataArray, 'year');
+            sortDescending(currentDisplay, 'year');
             menu.classList.remove('dropdown-menu-open')
-            console.log('sorted newest first', movieDataArray)
+            console.log('sorted newest first', currentDisplay)
         }
         if (option && option.id === 'rating-high') {
-            sortDescending(movieDataArray,'rating');
+            sortDescending(currentDisplay,'rating');
             menu.classList.remove('dropdown-menu-open')
             console.log('sorted highly rated')
         }
         if (option && option.id === 'oldest-first') {
-            sortAscending(movieDataArray, 'year');
+            sortAscending(currentDisplay, 'year');
             menu.classList.remove('dropdown-menu-open')
             console.log('sorted oldest first')
         }
         if (option && option.id === 'rating-low') {
-            sortAscending(movieDataArray,'rating');
+            sortAscending(currentDisplay,'rating');
             menu.classList.toggle('dropdown-menu-open')
             console.log('sorted lowest first')
         }
         
         removeTiles();
-        displayTiles(movieDataArray);
+        displayTiles(currentDisplay);
         menu.classList.remove('dropdown-menu-open')
     })
 });
@@ -100,7 +110,6 @@ function displayTiles(array) {
     container.append(tile)
 }
 }
-
 
  function removeTiles() {
     while(container.firstChild)
@@ -131,28 +140,13 @@ function sortDescending(array, key) {
     return ascending;
 }
 
-// // searching array of movie titles pulled from movieData.
-// let testArray = Object.keys(movieData);
-// console.log(testArray);
-// let findThis = 'royal tenenbaums' // input from user
-// let searchList = testArray.map(item => item.trim().toLowerCase()); // cleansed movieData array for searching purposes.
-// // do i need to sort searchList Alphabetically?
-// let cleansedSearchTerm = findThis.split(' '); // convert input to multiple terms
-// let found = searchList.filter(item => item.includes(findThis)) // returns an array of found items 
-// console.log(found);
-// // displayTiles(testArray)
-
-// searching only keynames in array version of movieData object
-let testArray = Object.entries(movieData);
-let titleList = [];
 // create an array showing film titles 
 function getFilmTitles(array) {
     for (let i = 0; i < array.length;i++) {
-      titleList.push(array[i][0])
+        titleList.push(array[i][0])
     };
     return titleList;
 }
-// console.log(getFilmTitles(testArray))
 
 // create an array of titles items that contain a search word
 function matchesFromInput(target,word) {
@@ -170,27 +164,21 @@ function infoForMatched(target, matches) {
     })
     return filmDetails;
 }
-searchTerm = 'grand';
+
 // function that displays film tiles based on input from user search.
 function displayMatches(dataArray,searchWord ) {
     removeTiles();
     const phase1 = getFilmTitles(dataArray);
+    if(phase1.length === 0) {
+        return console.log('not found');
+        notFoundMessage.classList.remove('message')
+    }
     const phase2 = matchesFromInput(phase1,searchWord);
-    const phase3 = infoForMatched(dataArray, phase2)
+    const phase3 = infoForMatched(dataArray, phase2);
+    currentDisplay = phase3;
     displayTiles(phase3)
-    // //checks:
+    //checks:
     // console.log('phase1',phase1);
     // console.log('phase2',phase2);
     // console.log('phase3', phase3)
 }
-
-// displayMatches(movieDataArray,searchTerm); // works! 
-
-// const phase1 = getFilmTitles(testArray);
-// const phase2 = matchesFromInput(phase1,'royal');
-// const phase3 = infoForMatched(testArray, phase2)
-// // displayTiles(phase3)
-// console.log('phase1',phase1);
-// console.log('phase2',phase2);
-// console.log('phase3', phase3)
-
