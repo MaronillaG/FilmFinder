@@ -6,15 +6,32 @@ const userInput = document.querySelector('#search-box'); // search box
 const select = document.querySelector('#sort');  // sort icon
 const menu = document.querySelector('#dropdown-menu'); // sort list
 const options = document.querySelectorAll('.dropdown-menu li'); // list item
-const plot = document.getElementById('plot') // for toggling plot summary
+// const plot = document.getElementById('plot') // for toggling plot summary
+// const storedData = localStorage.getItem('updatedData'); // picks up updated JSON object
+
 let movieDataArray = Object.entries(movieData);
 let currentDisplay = [];
 let searchTerm = '';
 let titleList = [];
 
+if(localStorage.getItem('updatedData')) {
+    const newData = JSON.parse(localStorage.getItem('updatedData'))
+
+    movieDataArray = Object.entries(newData);
+// pickup the JSON string of updatedData
+// convert to js object.
+// use that object to update current display.
+
+
+    console.log('movieDataArray',movieDataArray);
+} else {
+     console.log('movieData not updated');
+}
+
+// movieDataArray = storedData ? JSON.parse(storedData) : movieData;
 currentDisplay = movieDataArray;
 displayTiles(currentDisplay)
-console.log(movieDataArray);
+// console.log('movieDataAray = ', movieDataArray);
 
 function clearSearch() {
     searchTerm = '';
@@ -88,9 +105,9 @@ options.forEach( option => {
 
 // display event listener for plot
 
-plot.addEventListener('click', () => {
-    this.classList.toggle('expanded');
-})
+// plot.addEventListener('click', () => {
+//     this.classList.toggle('expanded');
+// })
 
 // function to display movie tiles:
 function displayTiles(array) {

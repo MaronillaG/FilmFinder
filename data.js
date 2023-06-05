@@ -1,4 +1,18 @@
-export let movieData = {
+ export function updateMovieData(obj) {
+  console.log('imported obj', obj)
+  const title = obj.title; // access and store the film's title in a variable.
+  delete obj.title; // remove the key:val pair of title:'tile of movie'
+  const filmEntry = {[title]: obj} // create new object with only one key:val pair. key is the title. value are all the other key:val pairs.
+  console.log('cleansed:', filmEntry); // check
+
+  const key = Object.keys(filmEntry)[0]; // stores title property in a key variable
+  movieData[key] = filmEntry[key]; // updates/adds a new object inside movieData. Problem: data lost when switching between windows. 
+
+  localStorage.setItem('updatedData', JSON.stringify(movieData)); // movieData should now have new entry. Then this is added to local storage
+  console.log('should show update object: ',movieData) //check
+}
+
+export const movieData = {
     "The Darjeeling Limited": {
       plot: "A year after their father's funeral, three brothers travel across India by train in an attempt to bond with each other.",
       cast: ["Jason Schwartzman", "Owen Wilson", "Adrien Brody"],

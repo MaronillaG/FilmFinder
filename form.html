@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Entry</title>
+    <link rel="stylesheet" href="form-styles.css">
+    <script src="form-data.js" type="module"></script>
+    <script src="data.js" type="module"></script>
+</head>
+<body>
+    <header>
+        <a href="./index.html"><h1 id="site-name" class="site-logo">Film<span class="highlight">Finder.</span></h1></a>
+    </header>
+    
+    <form id="form" class="container">
+        <fieldset id="film-info" class="sections">
+            <label for="title">Film Title:
+            <input type="text" name="title" class="inputs" required placeholder=" Enter Full Title...">
+             </label>
+             <label for="year">Year:
+                 <input type="text" name="year" class="inputs" required placeholder="Enter release year...">
+             </label>
+            <label for="plot">Plot Summary:
+                <input type="text" name="plot"  class="inputs" placeholder="Max 250 Characters.">
+            </label>
+            <label for="cast">Main Cast:
+                <input type="text" name="cast"  class="inputs" placeholder="Enter Cast Members...">
+            </label>
+            <label for="rating">Rating:
+                <input type="text" name="rating" class="inputs" required placeholder="Enter rating...">
+            </label>
+            <label for="runtime">Runtime (mins):
+                <input type="text" name="runtime" class="inputs"  placeholder="Enter Runtime...">
+            </label>
+            <label for="img">Upload Film Poster:
+                <input type="file" name="img"  class="inputs">
+            </label>
+        </fieldset>
+        <fieldset id="user-info" class="sections">
+        <label for="user" >Uploaded by:
+            <input type="text" name="user" class="inputs" required placeholder="Enter First and Last Name.">
+        </label>
+        <label for="email">Email Address:
+            <input type="email" id="email" class="inputs" name="email" required placeholder="Enter your email address.">
+        </label>
+        </fieldset>
+        <input type="submit" name="submit" value="Submit" class="inputs">
+    </form>
+   
+</body>
+</html>

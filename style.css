@@ -5,7 +5,6 @@ body {
     width: 100vw;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
 }
 
@@ -54,7 +53,7 @@ body {
 #search-bar * {
     margin: 5px 10px;
 }
-#clear{
+.btn{
     margin-top: 15px;
     border-radius: 10px;
     background-color:#2a2d35;
